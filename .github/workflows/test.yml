@@ -1,0 +1,53 @@
+name: CDK Reseed Job
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  NODE_VERSION: 20
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{env.NODE_VERSION}}
+      - name: Die
+        run: exit 2
+      - name: Install dependencies
+        run: yarn install
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.26.0
+        if: failure()
+        env:
+          SLACK_BOT_TOKEN: '${{ secrets.SLACK_BOT_TOKEN }}'
+        with:
+          channel-id: '${{ vars.SLACK_CHANNEL_ID }}'
+          payload: |
+            {
+              "text": "GHA workflow failed",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "GHA workflow failed in ${{ inputs.environment }} environment.[${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+                  }
+                }
+              ]
+            }

@@ -1,4 +1,4 @@
-name: CDK Reseed Job
+name: Slack alert test
 
 permissions:
   contents: read

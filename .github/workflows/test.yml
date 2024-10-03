@@ -48,12 +48,12 @@ jobs:
                     {
                       "type": "color",
                       "value": "#F405B3"
-                    },
-                    {
-                      "type": "text",
-                      "text": "GHA workflow failed in ${{ inputs.environment }} environment.[${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
                     }
                   ]
+                },
+                {
+                  "type": "text",
+                  "text": "GHA workflow failed in ${{ inputs.environment }} environment.[${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
                 }
               ]
             }

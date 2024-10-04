@@ -53,16 +53,12 @@ jobs:
                         },
                         {
                           "type": "text",
-                          "text": "GHA workflow failed in  ${{ inputs.environment }} environment."
+                          "text": "GHA workflow failed in ${{ inputs.environment }} environment.\n"
                         },
                         {
                           "type": "link",
                           "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
                           "text": "${{ github.repository }}"
-                        },
-                        {
-                          "type": "text",
-                          "text": ":\n"
                         }
                       ]
                     }

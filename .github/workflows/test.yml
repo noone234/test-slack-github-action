@@ -41,19 +41,20 @@ jobs:
           payload: |
             {
               "text": "GHA workflow failed",
+              "type": "rich_text",
               "elements": [
                 {
                   "type": "rich_text_section",
                   "elements": [
                     {
-                      "type": "color",
-                      "value": "#F405B3"
+                      "type": "emoji",
+                      "name": "fire"
+                    },
+                    {
+                      "type": "text",
+                      "text": "GHA workflow failed"
                     }
                   ]
-                },
-                {
-                  "type": "text",
-                  "text": "GHA workflow failed in ${{ inputs.environment }} environment.[${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
                 }
               ]
             }

@@ -40,19 +40,31 @@ jobs:
           channel-id: '${{ vars.SLACK_CHANNEL_ID }}'
           payload: |
             {
-              "text": "GHA workflow failed",
-              "type": "rich_text",
-              "elements": [
+              "blocks": [
                 {
-                  "type": "rich_text_section",
+                  "type": "rich_text",
                   "elements": [
                     {
-                      "type": "emoji",
-                      "name": "fire"
-                    },
-                    {
-                      "type": "text",
-                      "text": "GHA workflow failed"
+                      "type": "rich_text_section",
+                      "elements": [
+                        {
+                          "type": "emoji",
+                          "name": "fire"
+                        },
+                        {
+                          "type": "text",
+                          "text": "GHA workflow failed in  ${{ inputs.environment }} environment."
+                        },
+                        {
+                          "type": "link",
+                          "url": "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}",
+                          "text": "${{ github.repository }}"
+                        },
+                        {
+                          "type": "text",
+                          "text": ":\n"
+                        }
+                      ]
                     }
                   ]
                 }
